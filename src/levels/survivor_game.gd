@@ -107,13 +107,6 @@ func game_over() -> void:
 	get_tree().paused = true
 	game_over_ui.visible = true
 	game_over_score_label.text = "Final Score: %d" % $Player.player_score
-	# Също ако health <= 0: game_over()
-
-func take_damage(amount: int) -> void:
-	current_health -= amount
-	health_bar.value = current_health
-	if current_health <= 0:
-		game_over()
 
 # Button functions
 func _on_continue_button_pressed() -> void:

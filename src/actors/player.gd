@@ -16,7 +16,7 @@ signal dashed(dash)
 @onready var player_hurt_sound = $PlayerHurt
 @onready var player_shoot_sound = $CharShoot
 
-@onready var hp_bar = $Camera2D/HUD/TextureProgressBar 
+@onready var hp_bar = $CameraHUD/HUD/TextureProgressBar 
 @export var health = 100.0 # Make sure this is a float for delta math
 @export var max_health = 100
 @export var experience = 0
@@ -175,24 +175,24 @@ func keep_max_health():
 
 func on_item_pickup(value: int):
 	if mask_stack[0] != -1 and mask_stack[1] != -1:
-		if($ItemDuration.wait_time >= $ItemDuration2.wait_time):
+		if($MaskDuration.wait_time >= $MaskDuration2.wait_time):
 			print("mask 1 ", value)
 			mask_stack[1] = value
-			$ItemDuration2.start()
+			$MaskDuration2.start()
 		else:
 			print("mask 0 ", value)
 			mask_stack[0] = value
-			$ItemDuration.start()
+			$MaskDuration.start()
 	elif mask_stack[0] != -1:
 		mask_stack[1] = value
-		$ItemDuration2.start()
+		$MaskDuration2.start()
 	elif mask_stack[1] != -1:
 		mask_stack[0] = value
-		$ItemDuration.start()
+		$MaskDuration.start()
 	
 	else:
 		mask_stack[0] = value
-		$ItemDuration.start()
+		$MaskDuration.start()
 		
 	mask_changed.emit(mask_stack)
 	# make the buffs, change speed, make speed constant in the
