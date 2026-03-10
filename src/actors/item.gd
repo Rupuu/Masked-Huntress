@@ -8,7 +8,8 @@ var mask_fire = preload("res://assets/sprites/fire_mask_mini.png")
 var mask_lightning = preload("res://assets/sprites/lightning_mask_mini.png")
 var textures = [mask_earth, mask_fire, mask_lightning]
 
-@onready var mask_pickup_sound = %MaskPickUp
+@onready var mask_drop_sound = $MaskDrop
+@onready var mask_pickup_sound = $MaskPickUp
 
 func _ready():
 	$Sprite2D.texture = textures[item_type]
@@ -22,24 +23,27 @@ func start_floating():
 	# Move the sprite UP by 10 pixels over 1 second
 	# Use 'relative' so it moves 10px from its current spot
 	tween.tween_property($Sprite2D, "position:y", -10.0, 1.0).as_relative().set_trans(Tween.TRANS_SINE)
-	mask_pickup_sound.play()
+	mask_drop_sound.play()
 	# Move the sprite DOWN by 10 pixels over 1 second
 	tween.tween_property($Sprite2D, "position:y", 10.0, 1.0).as_relative().set_trans(Tween.TRANS_SINE)
 
 
 func _on_body_entered(body):
-	if item_type == 0 && body.has_method("on_item_pickup"):
-		
-		
+	if !body.has_method("on_item_pickup"):
+		return;
+			
+	if item_type == 0:
 		body.on_item_pickup(0)
-		
-	elif item_type == 1 && body.has_method("on_item_pickup"):
+
+	elif item_type == 1:
 		body.on_item_pickup(1)
-		
-		mask_pickup_sound.play()
-	elif item_type == 2 && body.has_method("on_item_pickup"):
-		
-		mask_pickup_sound.play()
+
+	elif item_type == 2:
 		body.on_item_pickup(2)
 	
+	$Sprite2D.visible = false
+	$CollisionShape2D.set_deferred("disabled", true)
+	
+	mask_pickup_sound.play()
+	await mask_pickup_sound.finished
 	queue_free()

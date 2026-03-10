@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cptoo6cjyw0t1" path="res://src/actors/item.gd" id="1_672s0"]
 [ext_resource type="AudioStream" uid="uid://clbasfvo2xm5m" path="res://audio/sfx/mask_drop.wav" id="2_vjtjh"]
+[ext_resource type="AudioStream" uid="uid://dnatenpyjbfvc" path="res://audio/sfx/mask_pickup2.wav" id="3_ixqqc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ll3t4"]
 radius = 29.068884
@@ -15,9 +16,11 @@ scale = Vector2(12, 12)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=182161759]
 shape = SubResource("CircleShape2D_ll3t4")
 
-[node name="MaskPickUp" type="AudioStreamPlayer" parent="." unique_id=1394792149]
-unique_name_in_owner = true
+[node name="MaskDrop" type="AudioStreamPlayer" parent="." unique_id=1394792149]
 stream = ExtResource("2_vjtjh")
-volume_db = 13.5
+volume_db = 6.0
+
+[node name="MaskPickUp" type="AudioStreamPlayer" parent="." unique_id=1360462]
+stream = ExtResource("3_ixqqc")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
