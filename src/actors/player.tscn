@@ -460,7 +460,7 @@ stream = ExtResource("11_l81xe")
 
 [node name="PlayerHurt" type="AudioStreamPlayer" parent="." unique_id=1544913687]
 stream = SubResource("AudioStreamRandomizer_ggk0d")
-volume_db = -10.0
+volume_db = 5.0
 
 [node name="CharShoot" type="AudioStreamPlayer" parent="." unique_id=114403673]
 stream = ExtResource("15_l81xe")

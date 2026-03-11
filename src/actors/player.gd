@@ -97,7 +97,9 @@ func take_damage(amount: float):
 	if is_dead:
 		return
 	if can_hurt_animation:
-		#player_hurt_sound.play()
+		if !player_hurt_sound.is_playing():
+			player_hurt_sound.play()
+		
 		animated_sprite.play('hurt')
 		await animated_sprite.animation_finished
 		animated_sprite.play('shoot')
@@ -108,11 +110,10 @@ func take_damage(amount: float):
 
 func die():
 	is_dead = true
+	if !player_death_sound.is_playing():
+		player_death_sound.play()
 	animated_sprite.play('die')
 	await animated_sprite.animation_finished
-	#add die sound
-	#player_death_sound.play()
-	#await sound
 	animated_sprite.play("dead")
 	game.game_over()
 
