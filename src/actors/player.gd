@@ -94,7 +94,6 @@ func take_damage(amount: float):
 	if health <= 0.0:
 		#player_death_sound.play()
 		die()
-	if is_dead:
 		return
 	if can_hurt_animation:
 		if !player_hurt_sound.is_playing():
