@@ -6,7 +6,6 @@ signal mask_changed(masks)
 signal exp_changed(exp)
 signal dashed(dash)
 
-@onready var game = get_node("/root/Game")
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var lvlup_animation = $lvlup
 @onready var weapon_timer = $Weapon/Timer
@@ -92,7 +91,6 @@ func take_damage(amount: float):
 		hp_bar.value = health
 		
 	if health <= 0.0:
-		#player_death_sound.play()
 		die()
 		return
 	if can_hurt_animation:
@@ -114,7 +112,6 @@ func die():
 	animated_sprite.play('die')
 	await animated_sprite.animation_finished
 	animated_sprite.play("dead")
-	game.game_over()
 
 func perform_dash(dash_direction: Vector2):
 	dashed.emit(dash_cooldown)

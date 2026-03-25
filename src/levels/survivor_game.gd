@@ -14,6 +14,7 @@ var game_active: bool = true
 @export var end_rates: Array[float] = []   # late game rates
 @export var ramp_time := 60.0              # seconds until end_rates
 
+@onready var player: CharacterBody2D = $Player
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var timer: Timer = $Clock
 @onready var ui: CanvasLayer = $UI
@@ -33,10 +34,7 @@ func _ready() -> void:
 	pause_ui.visible = false
 	game_over_ui.visible = false
 	
-	timer.start(90.0)  # 1:30 мин
 	spawn_timer.wait_time = spawn_start_interval
-	spawn_timer.start()
-	
 
 func current_rate(i: int) -> float:
 	var t: float = clamp(elapsed / ramp_time, 0.0, 1.0)
@@ -86,12 +84,14 @@ func _input(event: InputEvent) -> void:
 		toggle_pause()
 
 func _process(delta: float) -> void:
+	if player.is_dead:
+		game_over()
 	if game_active:
 		# Update UI
 		score_label.text = "Score: %d" % $Player.player_score
 		time_label.text = "Time: %d:%02d" % [int(timer.time_left / 60), int(timer.time_left) % 60]
-		if game_active:
-			elapsed += delta
+		elapsed += delta
+
 		# TODO: add_score(10) при hit на mob
 	
 func toggle_pause() -> void:
@@ -119,6 +119,8 @@ func _on_quit_button_pressed() -> void:
 
 
 func _on_clock_timeout() -> void:
+	#insert victory sound
+	player.animated_sprite.play("victory")
 	game_over()
 
 

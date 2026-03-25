@@ -167,6 +167,10 @@ region = Rect2(0, 128, 32, 32)
 atlas = ExtResource("2_xk21n")
 region = Rect2(0, 160, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hi83v"]
+atlas = ExtResource("2_1oxso")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xk21n"]
 atlas = ExtResource("2_foe4e")
 region = Rect2(0, 0, 32, 32)
@@ -326,6 +330,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_hi83v")
+}],
+"loop": true,
+"name": &"victory",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xk21n")
 }, {
 "duration": 1.0,
@@ -413,7 +425,7 @@ process_mode = 3
 position = Vector2(0.9999924, -68)
 scale = Vector2(5.840909, 5.840909)
 sprite_frames = SubResource("SpriteFrames_l3h4q")
-animation = &"dead"
+animation = &"victory"
 autoplay = "shoot"
 
 [node name="Weapon" parent="." unique_id=940212508 instance=ExtResource("3_foe4e")]

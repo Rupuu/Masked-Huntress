@@ -13,6 +13,7 @@ var count_hit = 0;
 
 func _physics_process(delta: float):
 	var animation_str = ""
+	
 	if(player.mask_stack.has(1)):
 		animation_str += "fire"
 		if !fire_arrow_sound.is_playing() and !sound_played:
